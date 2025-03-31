@@ -21,6 +21,12 @@ const locales: LocaleObject[] = [
     emoji: '🇺🇸',
   },
   {
+    code: 'vi-VN',
+    file: 'vi-VN.json',
+    name: 'Tiếng Việt',
+    emoji: '🇻🇳',
+  }
+  {
     code: 'fr-FR',
     file: 'fr-FR.json',
     name: 'Français',
