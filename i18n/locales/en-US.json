@@ -14,16 +14,11 @@
     "search": "Search"
   },
   "theme": {
-    "title": "Theme",
     "toggle": "Toggle theme",
     "light": "Light",
     "dark": "Dark",
     "system": "System"
   },
-  "language": {
-    "title": "Language"
-  },
-  "settings": "Settings",
   "login": {
     "title": "Login",
     "description": "Enter your site token to login",
