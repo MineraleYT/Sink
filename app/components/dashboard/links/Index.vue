@@ -1,6 +1,8 @@
 <script setup>
+import { ref, computed, watch, onMounted } from 'vue'
 import { useInfiniteScroll } from '@vueuse/core'
 import { Loader } from 'lucide-vue-next'
+import { usePreferences } from '~/composables/usePreferences'
 
 const links = ref([])
 const limit = 24
@@ -8,7 +10,23 @@ let cursor = ''
 let listComplete = false
 let listError = false
 
-const sortBy = ref('az')
+const { preferences, updateLinkSorting, isLoading: prefsLoading, init } = usePreferences()
+const sortBy = ref('az') // Default value
+
+// Initialize preferences and set initial sort
+onMounted(async () => {
+  await init()
+  if (preferences.value.linkSorting?.field) {
+    sortBy.value = preferences.value.linkSorting.field
+  }
+})
+
+// Watch for changes in sorting preference
+watch(sortBy, (newValue) => {
+  // Determine the direction based on the sort field
+  const direction = newValue === 'za' || newValue === 'oldest' ? 'desc' : 'asc'
+  updateLinkSorting(newValue, direction)
+})
 
 const displayedLinks = computed(() => {
   const sorted = [...links.value]
